@@ -10,6 +10,7 @@ class TrendingQuote extends StatefulWidget {
 
 class _TrendingQuoteState extends State<TrendingQuote> {
   String _tquoteimageurl = '';
+  String _name = '';
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class _TrendingQuoteState extends State<TrendingQuote> {
       child: Column(
         children: [
           const Padding(
-            padding: EdgeInsets.only(top: 150.0, bottom: 150),
+            padding: EdgeInsets.only(top: 150.0, bottom: 70),
             child: Text(
               'T R E N D I N G     Q U O T E',
               textAlign: TextAlign.start,
@@ -65,13 +66,119 @@ class _TrendingQuoteState extends State<TrendingQuote> {
                       borderRadius: BorderRadius.circular(10))),
             ),
           ),
+          const Padding(
+            padding: EdgeInsets.only(right: 11),
+            child: SizedBox(
+              height: 40,
+              width: 320,
+              child: Text(
+                'Name',
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontSize: 28,
+                  fontFamily: 'AltonaSans-Regular',
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 30,
+              bottom: 70,
+              right: 30,
+            ),
+            child: TextField(
+              autofocus: false,
+              cursorColor: Colors.pink[400],
+              onChanged: (value) {
+                _name = value;
+              },
+              decoration: InputDecoration(
+                  enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.pink)),
+                  focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.pink)),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10))),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20.0),
+            child: SizedBox(
+              height: 50,
+              width: 330,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.pink),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  if (_tquoteimageurl != '' && _name != '') {
+                    Map<String, dynamic> data = {
+                      "imageurl": _tquoteimageurl,
+                      "name": _name
+                    };
+                    FirebaseFirestore.instance
+                        .collection("trending_quotes")
+                        .doc(_name)
+                        .set({"imageurl": _tquoteimageurl, "name": _name});
+                  } else {
+                    print('data va enter pannu da');
+                  }
+                },
+                child: Text('U   P   L   O   A   D'),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20.0),
+            child: SizedBox(
+              height: 50,
+              width: 330,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.orange),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  if (_tquoteimageurl != '' && _name != '') {
+                    Map<String, dynamic> data = {
+                      "imageurl": _tquoteimageurl,
+                      "name": _name
+                    };
+                    FirebaseFirestore.instance
+                        .collection("trending_quotes")
+                        .doc(_name)
+                        .update({"imageurl": _tquoteimageurl, "name": _name});
+                  } else {
+                    print('data va enter pannu da');
+                  }
+                },
+                child: Text('U  P  D  A  T  E'),
+              ),
+            ),
+          ),
           SizedBox(
             height: 50,
             width: 330,
             child: ElevatedButton(
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.pink),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -79,20 +186,22 @@ class _TrendingQuoteState extends State<TrendingQuote> {
                 ),
               ),
               onPressed: () {
-                if (_tquoteimageurl != '') {
+                if (_tquoteimageurl != '' && _name != '') {
                   Map<String, dynamic> data = {
                     "imageurl": _tquoteimageurl,
+                    "name": _name
                   };
                   FirebaseFirestore.instance
                       .collection("trending_quotes")
-                      .add(data);
+                      .doc(_name)
+                      .delete();
                 } else {
                   print('data va enter pannu da');
                 }
               },
-              child: Text('U   P   L   O   A   D'),
+              child: Text('D  E  L  E  T  E'),
             ),
-          )
+          ),
         ],
       ),
     );

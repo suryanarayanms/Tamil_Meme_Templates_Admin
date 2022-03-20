@@ -21,7 +21,7 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
       child: Column(
         children: [
           const Padding(
-            padding: EdgeInsets.only(top: 150.0, bottom: 150),
+            padding: EdgeInsets.only(top: 150.0, bottom: 70),
             child: Text(
               'T R E N D I N G     T E M P L A T E',
               textAlign: TextAlign.start,
@@ -68,12 +68,12 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
             ),
           ),
           const Padding(
-            padding: EdgeInsets.only(top: 8.0, bottom: 1, right: 11),
+            padding: EdgeInsets.only(right: 11),
             child: SizedBox(
               height: 40,
               width: 320,
               child: Text(
-                'Image ',
+                'Name',
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 28,
@@ -85,7 +85,7 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
           Padding(
             padding: const EdgeInsets.only(
               left: 30,
-              bottom: 37,
+              bottom: 70,
               right: 30,
             ),
             child: TextField(
@@ -103,35 +103,74 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
                       borderRadius: BorderRadius.circular(10))),
             ),
           ),
-          SizedBox(
-            height: 50,
-            width: 330,
-            child: ElevatedButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(Color(0xFF7B61FF)),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20.0),
+            child: SizedBox(
+              height: 50,
+              width: 330,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Color(0xFF7B61FF)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
                   ),
                 ),
+                onPressed: () {
+                  if (_ttempimageurl != '' && _name != '') {
+                    Map<String, dynamic> data = {
+                      "imageurl": _ttempimageurl,
+                      "name": _name
+                    };
+                    FirebaseFirestore.instance
+                        .collection("trending_templates")
+                        .doc(_name)
+                        .set({"imageurl": _ttempimageurl, "name": _name});
+                  } else {
+                    print('data va enter pannu da');
+                  }
+                },
+                child: Text('U   P   L   O   A   D'),
               ),
-              onPressed: () {
-                if (_ttempimageurl != '' && _name != '') {
-                  Map<String, dynamic> data = {
-                    "imageurl": _ttempimageurl,
-                    "name": _name
-                  };
-                  FirebaseFirestore.instance
-                      .collection("trending_templates")
-                      .doc(_name)
-                      .set({"imageurl": _ttempimageurl, "name": _name});
-                } else {
-                  print('data va enter pannu da');
-                }
-              },
-              child: Text('U   P   L   O   A   D'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20.0),
+            child: SizedBox(
+              height: 50,
+              width: 330,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.orange),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  if (_ttempimageurl != '' && _name != '') {
+                    Map<String, dynamic> data = {
+                      "imageurl": _ttempimageurl,
+                      "name": _name
+                    };
+                    FirebaseFirestore.instance
+                        .collection("trending_templates")
+                        .doc(_name)
+                        .update({"imageurl": _ttempimageurl, "name": _name});
+                  } else {
+                    print('data va enter pannu da');
+                  }
+                },
+                child: Text('U  P  D  A  T  E'),
+              ),
             ),
           ),
           SizedBox(
@@ -140,39 +179,7 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
             child: ElevatedButton(
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(Color(0xFF7B61FF)),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                ),
-              ),
-              onPressed: () {
-                if (_ttempimageurl != '' && _name != '') {
-                  Map<String, dynamic> data = {
-                    "imageurl": _ttempimageurl,
-                    "name": _name
-                  };
-                  FirebaseFirestore.instance
-                      .collection("trending_templates")
-                      .doc(_name)
-                      .update({"imageurl": _ttempimageurl, "name": _name});
-                } else {
-                  print('data va enter pannu da');
-                }
-              },
-              child: Text('U  P  D  A  T  E'),
-            ),
-          ),
-          SizedBox(
-            height: 50,
-            width: 330,
-            child: ElevatedButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(Color(0xFF7B61FF)),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),

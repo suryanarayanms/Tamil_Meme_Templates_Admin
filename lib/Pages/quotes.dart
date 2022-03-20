@@ -11,6 +11,7 @@ class Quotes extends StatefulWidget {
 class _QuotesState extends State<Quotes> {
   String _quoteimageurl = '';
   String _quotename = '';
+  String _subquote = '';
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class _QuotesState extends State<Quotes> {
       child: Column(
         children: [
           const Padding(
-            padding: EdgeInsets.only(top: 150.0, bottom: 100),
+            padding: EdgeInsets.only(top: 150.0, bottom: 50),
             child: Text(
               'Q U O T E S',
               textAlign: TextAlign.start,
@@ -30,9 +31,9 @@ class _QuotesState extends State<Quotes> {
             ),
           ),
           const Padding(
-            padding: EdgeInsets.only(top: 8.0, bottom: 1, right: 11),
+            padding: EdgeInsets.only(top: 8.0, right: 11),
             child: SizedBox(
-              height: 40,
+              height: 32,
               width: 320,
               child: Text(
                 'Image URL',
@@ -46,30 +47,29 @@ class _QuotesState extends State<Quotes> {
           ),
           Padding(
             padding: const EdgeInsets.only(
-              // top: 20.0,
               left: 30,
-              bottom: 37,
+              bottom: 20,
               right: 30,
             ),
             child: TextField(
               autofocus: false,
-              cursorColor: Colors.orange,
-              onChanged: (imageurl) {
-                _quoteimageurl = imageurl;
+              cursorColor: Colors.blueAccent,
+              onChanged: (value) {
+                _quoteimageurl = value;
               },
               decoration: InputDecoration(
                   enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange)),
+                      borderSide: BorderSide(color: Colors.blueAccent)),
                   focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange)),
+                      borderSide: BorderSide(color: Colors.blueAccent)),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10))),
             ),
           ),
           const Padding(
-            padding: EdgeInsets.only(top: 8.0, bottom: 1, right: 11),
+            padding: EdgeInsets.only(right: 11),
             child: SizedBox(
-              height: 40,
+              height: 32,
               width: 320,
               child: Text(
                 'Name',
@@ -84,22 +84,150 @@ class _QuotesState extends State<Quotes> {
           Padding(
             padding: const EdgeInsets.only(
               left: 30,
-              bottom: 80,
+              bottom: 20,
               right: 30,
             ),
             child: TextField(
               autofocus: false,
-              cursorColor: Colors.orange[400],
+              cursorColor: Colors.blueAccent[400],
               onChanged: (quotename) {
                 _quotename = quotename;
               },
               decoration: InputDecoration(
                   enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange)),
+                      borderSide: BorderSide(color: Colors.blueAccent)),
                   focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange)),
+                      borderSide: BorderSide(color: Colors.blueAccent)),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10))),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(right: 11),
+            child: SizedBox(
+              height: 32,
+              width: 320,
+              child: Text(
+                'Sub-Collection',
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontSize: 28,
+                  fontFamily: 'AltonaSans-Regular',
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 30,
+              bottom: 40,
+              right: 30,
+            ),
+            child: TextField(
+              autofocus: false,
+              cursorColor: Colors.blueAccent,
+              onChanged: (subquote) {
+                _subquote = subquote;
+              },
+              decoration: InputDecoration(
+                  enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blueAccent)),
+                  focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blueAccent)),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10))),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20.0),
+            child: SizedBox(
+              height: 50,
+              width: 330,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.blueAccent),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  if (_quoteimageurl != '' &&
+                      _quotename != '' &&
+                      _subquote == '') {
+                    Map<String, dynamic> data = {
+                      "imageurl": _quoteimageurl,
+                      "name": _quotename
+                    };
+                    FirebaseFirestore.instance
+                        .collection("template")
+                        .doc(_quotename)
+                        .set({"imageurl": _quoteimageurl, "name": _quotename});
+                  } else if (_quoteimageurl != '' &&
+                      _quotename != '' &&
+                      _subquote == '') {
+                    FirebaseFirestore.instance
+                        .collection("template")
+                        .doc(_quotename)
+                        .collection(_subquote)
+                        .doc("images")
+                        .set({"imageurl": _quoteimageurl, "name": _quotename});
+                  } else {
+                    print('data va enter pannu da');
+                  }
+                },
+                child: Text('U   P   L   O   A   D'),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20.0),
+            child: SizedBox(
+              height: 50,
+              width: 330,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.orange),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  if (_quoteimageurl != '' &&
+                      _quotename != '' &&
+                      _subquote == '') {
+                    Map<String, dynamic> data = {
+                      "imageurl": _quoteimageurl,
+                      "name": _quotename
+                    };
+                    FirebaseFirestore.instance
+                        .collection("template")
+                        .doc(_quotename)
+                        .set({"imageurl": _quoteimageurl, "name": _quotename});
+                  } else if (_quoteimageurl != '' &&
+                      _quotename != '' &&
+                      _subquote == '') {
+                    FirebaseFirestore.instance
+                        .collection("template")
+                        .doc(_quotename)
+                        .collection(_subquote)
+                        .doc("images")
+                        .set({"imageurl": _quoteimageurl, "name": _quotename});
+                  } else {
+                    print('data va enter pannu da');
+                  }
+                },
+                child: Text('U   P   D   A   T   E'),
+              ),
             ),
           ),
           SizedBox(
@@ -108,8 +236,7 @@ class _QuotesState extends State<Quotes> {
             child: ElevatedButton(
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.orange),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -117,19 +244,31 @@ class _QuotesState extends State<Quotes> {
                 ),
               ),
               onPressed: () {
-                if (_quoteimageurl != '' && _quotename != '') {
+                if (_quoteimageurl != '' &&
+                    _quotename != '' &&
+                    _subquote == '') {
                   Map<String, dynamic> data = {
                     "imageurl": _quoteimageurl,
                     "name": _quotename
                   };
-
-                  // FirebaseFirestore.instance.collection("quotes").doc().collection('images').add(data);
-                  FirebaseFirestore.instance.collection("quotes").add(data);
+                  FirebaseFirestore.instance
+                      .collection("template")
+                      .doc(_quotename)
+                      .delete();
+                } else if (_quoteimageurl != '' &&
+                    _quotename != '' &&
+                    _subquote == '') {
+                  FirebaseFirestore.instance
+                      .collection("template")
+                      .doc(_quotename)
+                      .collection(_subquote)
+                      .doc("images")
+                      .delete();
                 } else {
                   print('data va enter pannu da');
                 }
               },
-              child: Text('U   P   L   O   A   D'),
+              child: Text('D   E   L   E   T   E'),
             ),
           )
         ],

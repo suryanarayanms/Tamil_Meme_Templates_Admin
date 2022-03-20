@@ -80,7 +80,7 @@ class _AdminPageState extends State<AdminPage> {
                       BottomNavigationBarItem(
                           icon: Icon(
                             Icons.mode_night,
-                            color: Colors.orange,
+                            color: Colors.blueAccent,
                           ),
                           label: ""),
                     ],
