@@ -1,3 +1,4 @@
+import 'package:butterfly_effect_admin/Pages/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -11,7 +12,7 @@ class Templates extends StatefulWidget {
 class _TemplatesState extends State<Templates> {
   String _tempimageurl = '';
   String _tempname = '';
-  String _subtemp = '';
+  String _subdoc = '';
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +73,7 @@ class _TemplatesState extends State<Templates> {
               height: 32,
               width: 320,
               child: Text(
-                'Name',
+                'Cover Pic Name',
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 28,
@@ -108,7 +109,7 @@ class _TemplatesState extends State<Templates> {
               height: 32,
               width: 320,
               child: Text(
-                'Sub-Collection',
+                'Template Name',
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 28,
@@ -127,7 +128,7 @@ class _TemplatesState extends State<Templates> {
               autofocus: false,
               cursorColor: Color(0xFF21BFBD),
               onChanged: (subtemp) {
-                _subtemp = subtemp;
+                _subdoc = subtemp;
               },
               decoration: InputDecoration(
                   enabledBorder: const OutlineInputBorder(
@@ -156,9 +157,7 @@ class _TemplatesState extends State<Templates> {
                   ),
                 ),
                 onPressed: () {
-                  if (_tempimageurl != '' &&
-                      _tempname != '' &&
-                      _subtemp == '') {
+                  if (_tempimageurl != '' && _tempname != '' && _subdoc == '') {
                     Map<String, dynamic> data = {
                       "imageurl": _tempimageurl,
                       "name": _tempname
@@ -167,17 +166,24 @@ class _TemplatesState extends State<Templates> {
                         .collection("template")
                         .doc(_tempname)
                         .set({"imageurl": _tempimageurl, "name": _tempname});
+                    return Snackbar().showFlushbar(
+                        context: context,
+                        message: "$_tempname Cover Pic Uploaded");
                   } else if (_tempimageurl != '' &&
                       _tempname != '' &&
-                      _subtemp == '') {
+                      _subdoc != '') {
                     FirebaseFirestore.instance
                         .collection("template")
                         .doc(_tempname)
-                        .collection(_subtemp)
-                        .doc("images")
+                        .collection("templates")
+                        .doc(_subdoc)
                         .set({"imageurl": _tempimageurl, "name": _tempname});
+                    return Snackbar().showFlushbar(
+                        context: context,
+                        message: "$_tempname $_subdoc Template Uploaded");
                   } else {
-                    print('data va enter pannu da');
+                    return Snackbar().showFlushbar(
+                        context: context, message: "Provide some credentials");
                   }
                 },
                 child: Text('U   P   L   O   A   D'),
@@ -202,9 +208,7 @@ class _TemplatesState extends State<Templates> {
                   ),
                 ),
                 onPressed: () {
-                  if (_tempimageurl != '' &&
-                      _tempname != '' &&
-                      _subtemp == '') {
+                  if (_tempimageurl != '' && _tempname != '' && _subdoc == '') {
                     Map<String, dynamic> data = {
                       "imageurl": _tempimageurl,
                       "name": _tempname
@@ -212,18 +216,25 @@ class _TemplatesState extends State<Templates> {
                     FirebaseFirestore.instance
                         .collection("template")
                         .doc(_tempname)
-                        .set({"imageurl": _tempimageurl, "name": _tempname});
+                        .update({"imageurl": _tempimageurl, "name": _tempname});
+                    return Snackbar().showFlushbar(
+                        context: context,
+                        message: "$_tempname Cover Pic Updated");
                   } else if (_tempimageurl != '' &&
                       _tempname != '' &&
-                      _subtemp == '') {
+                      _subdoc != '') {
                     FirebaseFirestore.instance
                         .collection("template")
                         .doc(_tempname)
-                        .collection(_subtemp)
-                        .doc("images")
-                        .set({"imageurl": _tempimageurl, "name": _tempname});
+                        .collection("templates")
+                        .doc(_subdoc)
+                        .update({"imageurl": _tempimageurl, "name": _tempname});
+                    return Snackbar().showFlushbar(
+                        context: context,
+                        message: "$_tempname $_subdoc Template Updated");
                   } else {
-                    print('data va enter pannu da');
+                    return Snackbar().showFlushbar(
+                        context: context, message: "Provide some credentials");
                   }
                 },
                 child: Text('U   P   D   A   T   E'),
@@ -244,7 +255,7 @@ class _TemplatesState extends State<Templates> {
                 ),
               ),
               onPressed: () {
-                if (_tempimageurl != '' && _tempname != '' && _subtemp == '') {
+                if (_tempimageurl != '' && _tempname != '' && _subdoc == '') {
                   Map<String, dynamic> data = {
                     "imageurl": _tempimageurl,
                     "name": _tempname
@@ -253,17 +264,24 @@ class _TemplatesState extends State<Templates> {
                       .collection("template")
                       .doc(_tempname)
                       .delete();
+                  return Snackbar().showFlushbar(
+                      context: context,
+                      message: "$_tempname Cover Pic Deleted");
                 } else if (_tempimageurl != '' &&
                     _tempname != '' &&
-                    _subtemp == '') {
+                    _subdoc != '') {
                   FirebaseFirestore.instance
                       .collection("template")
                       .doc(_tempname)
-                      .collection(_subtemp)
-                      .doc("images")
+                      .collection("templates")
+                      .doc(_subdoc)
                       .delete();
+                  return Snackbar().showFlushbar(
+                      context: context,
+                      message: "$_tempname $_subdoc Template Deleted");
                 } else {
-                  print('data va enter pannu da');
+                  return Snackbar().showFlushbar(
+                      context: context, message: "Provide some credentials");
                 }
               },
               child: Text('D   E   L   E   T   E'),

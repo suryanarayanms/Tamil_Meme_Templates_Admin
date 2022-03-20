@@ -1,3 +1,4 @@
+import 'package:butterfly_effect_admin/Pages/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -11,7 +12,7 @@ class Quotes extends StatefulWidget {
 class _QuotesState extends State<Quotes> {
   String _quoteimageurl = '';
   String _quotename = '';
-  String _subquote = '';
+  String _subdoc = '';
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +73,7 @@ class _QuotesState extends State<Quotes> {
               height: 32,
               width: 320,
               child: Text(
-                'Name',
+                'Cover Pic Name',
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 28,
@@ -89,9 +90,9 @@ class _QuotesState extends State<Quotes> {
             ),
             child: TextField(
               autofocus: false,
-              cursorColor: Colors.blueAccent[400],
-              onChanged: (quotename) {
-                _quotename = quotename;
+              cursorColor: Colors.blueAccent,
+              onChanged: (tempname) {
+                _quotename = tempname;
               },
               decoration: InputDecoration(
                   enabledBorder: const OutlineInputBorder(
@@ -108,7 +109,7 @@ class _QuotesState extends State<Quotes> {
               height: 32,
               width: 320,
               child: Text(
-                'Sub-Collection',
+                'Quotes Name',
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 28,
@@ -126,8 +127,8 @@ class _QuotesState extends State<Quotes> {
             child: TextField(
               autofocus: false,
               cursorColor: Colors.blueAccent,
-              onChanged: (subquote) {
-                _subquote = subquote;
+              onChanged: (subtemp) {
+                _subdoc = subtemp;
               },
               decoration: InputDecoration(
                   enabledBorder: const OutlineInputBorder(
@@ -158,26 +159,33 @@ class _QuotesState extends State<Quotes> {
                 onPressed: () {
                   if (_quoteimageurl != '' &&
                       _quotename != '' &&
-                      _subquote == '') {
+                      _subdoc == '') {
                     Map<String, dynamic> data = {
                       "imageurl": _quoteimageurl,
                       "name": _quotename
                     };
                     FirebaseFirestore.instance
-                        .collection("template")
+                        .collection("quote")
                         .doc(_quotename)
                         .set({"imageurl": _quoteimageurl, "name": _quotename});
+                    return Snackbar().showFlushbar(
+                        context: context,
+                        message: "$_quotename Cover Pic Uploaded");
                   } else if (_quoteimageurl != '' &&
                       _quotename != '' &&
-                      _subquote == '') {
+                      _subdoc != '') {
                     FirebaseFirestore.instance
-                        .collection("template")
+                        .collection("quote")
                         .doc(_quotename)
-                        .collection(_subquote)
-                        .doc("images")
+                        .collection("quotes")
+                        .doc(_subdoc)
                         .set({"imageurl": _quoteimageurl, "name": _quotename});
+                    return Snackbar().showFlushbar(
+                        context: context,
+                        message: "$_quotename $_subdoc quotes Uploaded");
                   } else {
-                    print('data va enter pannu da');
+                    return Snackbar().showFlushbar(
+                        context: context, message: "Provide some credentials");
                   }
                 },
                 child: Text('U   P   L   O   A   D'),
@@ -204,26 +212,35 @@ class _QuotesState extends State<Quotes> {
                 onPressed: () {
                   if (_quoteimageurl != '' &&
                       _quotename != '' &&
-                      _subquote == '') {
+                      _subdoc == '') {
                     Map<String, dynamic> data = {
                       "imageurl": _quoteimageurl,
                       "name": _quotename
                     };
                     FirebaseFirestore.instance
-                        .collection("template")
+                        .collection("quote")
                         .doc(_quotename)
-                        .set({"imageurl": _quoteimageurl, "name": _quotename});
+                        .update(
+                            {"imageurl": _quoteimageurl, "name": _quotename});
+                    return Snackbar().showFlushbar(
+                        context: context,
+                        message: "$_quotename Cover Pic Updated");
                   } else if (_quoteimageurl != '' &&
                       _quotename != '' &&
-                      _subquote == '') {
+                      _subdoc != '') {
                     FirebaseFirestore.instance
-                        .collection("template")
+                        .collection("quote")
                         .doc(_quotename)
-                        .collection(_subquote)
-                        .doc("images")
-                        .set({"imageurl": _quoteimageurl, "name": _quotename});
+                        .collection("quotes")
+                        .doc(_subdoc)
+                        .update(
+                            {"imageurl": _quoteimageurl, "name": _quotename});
+                    return Snackbar().showFlushbar(
+                        context: context,
+                        message: "$_quotename $_subdoc Quotes Updated");
                   } else {
-                    print('data va enter pannu da');
+                    return Snackbar().showFlushbar(
+                        context: context, message: "Provide some credentials");
                   }
                 },
                 child: Text('U   P   D   A   T   E'),
@@ -244,28 +261,33 @@ class _QuotesState extends State<Quotes> {
                 ),
               ),
               onPressed: () {
-                if (_quoteimageurl != '' &&
-                    _quotename != '' &&
-                    _subquote == '') {
+                if (_quoteimageurl != '' && _quotename != '' && _subdoc == '') {
                   Map<String, dynamic> data = {
                     "imageurl": _quoteimageurl,
                     "name": _quotename
                   };
                   FirebaseFirestore.instance
-                      .collection("template")
+                      .collection("quote")
                       .doc(_quotename)
                       .delete();
+                  return Snackbar().showFlushbar(
+                      context: context,
+                      message: "$_quotename Cover Pic Deleted");
                 } else if (_quoteimageurl != '' &&
                     _quotename != '' &&
-                    _subquote == '') {
+                    _subdoc != '') {
                   FirebaseFirestore.instance
-                      .collection("template")
+                      .collection("quote")
                       .doc(_quotename)
-                      .collection(_subquote)
-                      .doc("images")
+                      .collection("quotes")
+                      .doc(_subdoc)
                       .delete();
+                  return Snackbar().showFlushbar(
+                      context: context,
+                      message: "$_quotename $_subdoc Quote Deleted");
                 } else {
-                  print('data va enter pannu da');
+                  return Snackbar().showFlushbar(
+                      context: context, message: "Provide some credentials");
                 }
               },
               child: Text('D   E   L   E   T   E'),
@@ -276,20 +298,3 @@ class _QuotesState extends State<Quotes> {
     );
   }
 }
-
-
-// body: Padding(
-//         padding: const EdgeInsets.all(30),
-//         child: Center(
-//           child: TextField(
-//             decoration: InputDecoration(
-//                 hintText: 'KindaCode.com',
-//                 contentPadding: const EdgeInsets.all(15),
-//                 border: OutlineInputBorder(
-//                     borderRadius: BorderRadius.circular(10))),
-//             onChanged: (value) {
-//               // do something
-//             },
-//           ),
-//         ),
-//       ),

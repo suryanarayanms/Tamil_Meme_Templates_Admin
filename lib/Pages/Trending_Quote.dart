@@ -1,3 +1,4 @@
+import 'package:butterfly_effect_admin/Pages/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -129,8 +130,12 @@ class _TrendingQuoteState extends State<TrendingQuote> {
                         .collection("trending_quotes")
                         .doc(_name)
                         .set({"imageurl": _tquoteimageurl, "name": _name});
+                    return Snackbar().showFlushbar(
+                        context: context,
+                        message: "Trending $_name Quote Uploaded");
                   } else {
-                    print('data va enter pannu da');
+                    return Snackbar().showFlushbar(
+                        context: context, message: "Provide some credentials");
                   }
                 },
                 child: Text('U   P   L   O   A   D'),
@@ -164,8 +169,12 @@ class _TrendingQuoteState extends State<TrendingQuote> {
                         .collection("trending_quotes")
                         .doc(_name)
                         .update({"imageurl": _tquoteimageurl, "name": _name});
+                    return Snackbar().showFlushbar(
+                        context: context,
+                        message: "Trending $_name Template Updated");
                   } else {
-                    print('data va enter pannu da');
+                    return Snackbar().showFlushbar(
+                        context: context, message: "Provide some credentials");
                   }
                 },
                 child: Text('U  P  D  A  T  E'),
@@ -186,7 +195,7 @@ class _TrendingQuoteState extends State<TrendingQuote> {
                 ),
               ),
               onPressed: () {
-                if (_tquoteimageurl != '' && _name != '') {
+                if (_name != '') {
                   Map<String, dynamic> data = {
                     "imageurl": _tquoteimageurl,
                     "name": _name
@@ -195,8 +204,12 @@ class _TrendingQuoteState extends State<TrendingQuote> {
                       .collection("trending_quotes")
                       .doc(_name)
                       .delete();
+                  return Snackbar().showFlushbar(
+                      context: context,
+                      message: "Trending $_name Template Deleted");
                 } else {
-                  print('data va enter pannu da');
+                  return Snackbar().showFlushbar(
+                      context: context, message: "Provide some credentials");
                 }
               },
               child: Text('D  E  L  E  T  E'),

@@ -1,3 +1,4 @@
+import 'package:butterfly_effect_admin/Pages/flushbar.dart';
 import 'package:flutter/material.dart';
 // import 'package:firebase_core/firebase_core.dart';
 
@@ -130,8 +131,12 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
                         .collection("trending_templates")
                         .doc(_name)
                         .set({"imageurl": _ttempimageurl, "name": _name});
+                    return Snackbar().showFlushbar(
+                        context: context,
+                        message: "Trending $_name Template Uploaded");
                   } else {
-                    print('data va enter pannu da');
+                    return Snackbar().showFlushbar(
+                        context: context, message: "Provide some credentials");
                   }
                 },
                 child: Text('U   P   L   O   A   D'),
@@ -165,8 +170,12 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
                         .collection("trending_templates")
                         .doc(_name)
                         .update({"imageurl": _ttempimageurl, "name": _name});
+                    return Snackbar().showFlushbar(
+                        context: context,
+                        message: "Trending $_name Template Updated");
                   } else {
-                    print('data va enter pannu da');
+                    return Snackbar().showFlushbar(
+                        context: context, message: "Provide some credentials");
                   }
                 },
                 child: Text('U  P  D  A  T  E'),
@@ -187,7 +196,7 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
                 ),
               ),
               onPressed: () {
-                if (_ttempimageurl != '' && _name != '') {
+                if (_name != '') {
                   Map<String, dynamic> data = {
                     "imageurl": _ttempimageurl,
                     "name": _name
@@ -196,8 +205,12 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
                       .collection("trending_templates")
                       .doc(_name)
                       .delete();
+                  return Snackbar().showFlushbar(
+                      context: context,
+                      message: "Trending $_name Template Deleted");
                 } else {
-                  print('data va enter pannu da');
+                  return Snackbar().showFlushbar(
+                      context: context, message: "Provide some credentials");
                 }
               },
               child: Text('D  E  L  E  T  E'),
