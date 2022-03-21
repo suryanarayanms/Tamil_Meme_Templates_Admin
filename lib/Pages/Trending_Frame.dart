@@ -2,15 +2,15 @@ import 'package:butterfly_effect_admin/Pages/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class TrendingQuote extends StatefulWidget {
-  const TrendingQuote({Key? key}) : super(key: key);
+class TrendingFrame extends StatefulWidget {
+  const TrendingFrame({Key? key}) : super(key: key);
 
   @override
-  State<TrendingQuote> createState() => _TrendingQuoteState();
+  State<TrendingFrame> createState() => _TrendingFrameState();
 }
 
-class _TrendingQuoteState extends State<TrendingQuote> {
-  String _tquoteimageurl = '';
+class _TrendingFrameState extends State<TrendingFrame> {
+  String _tframeimageurl = '';
   String _name = '';
 
   @override
@@ -22,7 +22,7 @@ class _TrendingQuoteState extends State<TrendingQuote> {
           const Padding(
             padding: EdgeInsets.only(top: 150.0, bottom: 70),
             child: Text(
-              'T R E N D I N G     Q U O T E',
+              'T R E N D I N G     F R A M E',
               textAlign: TextAlign.start,
               style: TextStyle(
                 fontFamily: 'AltonaSans-Regular',
@@ -56,7 +56,7 @@ class _TrendingQuoteState extends State<TrendingQuote> {
               autofocus: false,
               cursorColor: Colors.pink,
               onChanged: (imageurl) {
-                _tquoteimageurl = imageurl;
+                _tframeimageurl = imageurl;
               },
               decoration: InputDecoration(
                   enabledBorder: const OutlineInputBorder(
@@ -121,18 +121,18 @@ class _TrendingQuoteState extends State<TrendingQuote> {
                   ),
                 ),
                 onPressed: () {
-                  if (_tquoteimageurl != '' && _name != '') {
+                  if (_tframeimageurl != '' && _name != '') {
                     Map<String, dynamic> data = {
-                      "imageurl": _tquoteimageurl,
+                      "imageurl": _tframeimageurl,
                       "name": _name
                     };
                     FirebaseFirestore.instance
-                        .collection("trending_quotes")
+                        .collection("trending_frames")
                         .doc(_name)
-                        .set({"imageurl": _tquoteimageurl, "name": _name});
+                        .set({"imageurl": _tframeimageurl, "name": _name});
                     return Snackbar().showFlushbar(
                         context: context,
-                        message: "Trending $_name Quote Uploaded");
+                        message: "Trending $_name Frame Uploaded");
                   } else {
                     return Snackbar().showFlushbar(
                         context: context, message: "Provide some credentials");
@@ -160,18 +160,18 @@ class _TrendingQuoteState extends State<TrendingQuote> {
                   ),
                 ),
                 onPressed: () {
-                  if (_tquoteimageurl != '' && _name != '') {
+                  if (_tframeimageurl != '' && _name != '') {
                     Map<String, dynamic> data = {
-                      "imageurl": _tquoteimageurl,
+                      "imageurl": _tframeimageurl,
                       "name": _name
                     };
                     FirebaseFirestore.instance
-                        .collection("trending_quotes")
+                        .collection("trending_frames")
                         .doc(_name)
-                        .update({"imageurl": _tquoteimageurl, "name": _name});
+                        .update({"imageurl": _tframeimageurl, "name": _name});
                     return Snackbar().showFlushbar(
                         context: context,
-                        message: "Trending $_name Template Updated");
+                        message: "Trending $_name Frame Updated");
                   } else {
                     return Snackbar().showFlushbar(
                         context: context, message: "Provide some credentials");
@@ -197,16 +197,16 @@ class _TrendingQuoteState extends State<TrendingQuote> {
               onPressed: () {
                 if (_name != '') {
                   Map<String, dynamic> data = {
-                    "imageurl": _tquoteimageurl,
+                    "imageurl": _tframeimageurl,
                     "name": _name
                   };
                   FirebaseFirestore.instance
-                      .collection("trending_quotes")
+                      .collection("trending_frames")
                       .doc(_name)
                       .delete();
                   return Snackbar().showFlushbar(
                       context: context,
-                      message: "Trending $_name Template Deleted");
+                      message: "Trending $_name Frame Deleted");
                 } else {
                   return Snackbar().showFlushbar(
                       context: context, message: "Provide some credentials");

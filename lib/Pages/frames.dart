@@ -2,16 +2,16 @@ import 'package:butterfly_effect_admin/Pages/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Quotes extends StatefulWidget {
-  const Quotes({Key? key}) : super(key: key);
+class Frames extends StatefulWidget {
+  const Frames({Key? key}) : super(key: key);
 
   @override
-  State<Quotes> createState() => _QuotesState();
+  State<Frames> createState() => _FramesState();
 }
 
-class _QuotesState extends State<Quotes> {
-  String _quoteimageurl = '';
-  String _quotename = '';
+class _FramesState extends State<Frames> {
+  String _frameimageurl = '';
+  String _framename = '';
   String _subdoc = '';
 
   @override
@@ -23,7 +23,7 @@ class _QuotesState extends State<Quotes> {
           const Padding(
             padding: EdgeInsets.only(top: 150.0, bottom: 50),
             child: Text(
-              'Q U O T E S',
+              'F R A M E S',
               textAlign: TextAlign.start,
               style: TextStyle(
                 fontFamily: 'AltonaSans-Regular',
@@ -56,7 +56,7 @@ class _QuotesState extends State<Quotes> {
               autofocus: false,
               cursorColor: Colors.blueAccent,
               onChanged: (value) {
-                _quoteimageurl = value;
+                _frameimageurl = value;
               },
               decoration: InputDecoration(
                   enabledBorder: const OutlineInputBorder(
@@ -92,7 +92,7 @@ class _QuotesState extends State<Quotes> {
               autofocus: false,
               cursorColor: Colors.blueAccent,
               onChanged: (tempname) {
-                _quotename = tempname;
+                _framename = tempname;
               },
               decoration: InputDecoration(
                   enabledBorder: const OutlineInputBorder(
@@ -109,7 +109,7 @@ class _QuotesState extends State<Quotes> {
               height: 32,
               width: 320,
               child: Text(
-                'Quotes Name',
+                'Frames Name',
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 28,
@@ -157,32 +157,32 @@ class _QuotesState extends State<Quotes> {
                   ),
                 ),
                 onPressed: () {
-                  if (_quoteimageurl != '' &&
-                      _quotename != '' &&
+                  if (_frameimageurl != '' &&
+                      _framename != '' &&
                       _subdoc == '') {
                     Map<String, dynamic> data = {
-                      "imageurl": _quoteimageurl,
-                      "name": _quotename
+                      "imageurl": _frameimageurl,
+                      "name": _framename
                     };
                     FirebaseFirestore.instance
-                        .collection("quote")
-                        .doc(_quotename)
-                        .set({"imageurl": _quoteimageurl, "name": _quotename});
+                        .collection("frame")
+                        .doc(_framename)
+                        .set({"imageurl": _frameimageurl, "name": _framename});
                     return Snackbar().showFlushbar(
                         context: context,
-                        message: "$_quotename Cover Pic Uploaded");
-                  } else if (_quoteimageurl != '' &&
-                      _quotename != '' &&
+                        message: "$_framename Cover Pic Uploaded");
+                  } else if (_frameimageurl != '' &&
+                      _framename != '' &&
                       _subdoc != '') {
                     FirebaseFirestore.instance
-                        .collection("quote")
-                        .doc(_quotename)
-                        .collection("quotes")
+                        .collection("frame")
+                        .doc(_framename)
+                        .collection("frames")
                         .doc(_subdoc)
-                        .set({"imageurl": _quoteimageurl, "name": _quotename});
+                        .set({"imageurl": _frameimageurl, "name": _framename});
                     return Snackbar().showFlushbar(
                         context: context,
-                        message: "$_quotename $_subdoc quotes Uploaded");
+                        message: "$_framename $_subdoc Frames Uploaded");
                   } else {
                     return Snackbar().showFlushbar(
                         context: context, message: "Provide some credentials");
@@ -210,34 +210,34 @@ class _QuotesState extends State<Quotes> {
                   ),
                 ),
                 onPressed: () {
-                  if (_quoteimageurl != '' &&
-                      _quotename != '' &&
+                  if (_frameimageurl != '' &&
+                      _framename != '' &&
                       _subdoc == '') {
                     Map<String, dynamic> data = {
-                      "imageurl": _quoteimageurl,
-                      "name": _quotename
+                      "imageurl": _frameimageurl,
+                      "name": _framename
                     };
                     FirebaseFirestore.instance
-                        .collection("quote")
-                        .doc(_quotename)
+                        .collection("frame")
+                        .doc(_framename)
                         .update(
-                            {"imageurl": _quoteimageurl, "name": _quotename});
+                            {"imageurl": _frameimageurl, "name": _framename});
                     return Snackbar().showFlushbar(
                         context: context,
-                        message: "$_quotename Cover Pic Updated");
-                  } else if (_quoteimageurl != '' &&
-                      _quotename != '' &&
+                        message: "$_framename Cover Pic Updated");
+                  } else if (_frameimageurl != '' &&
+                      _framename != '' &&
                       _subdoc != '') {
                     FirebaseFirestore.instance
-                        .collection("quote")
-                        .doc(_quotename)
-                        .collection("quotes")
+                        .collection("frame")
+                        .doc(_framename)
+                        .collection("frames")
                         .doc(_subdoc)
                         .update(
-                            {"imageurl": _quoteimageurl, "name": _quotename});
+                            {"imageurl": _frameimageurl, "name": _framename});
                     return Snackbar().showFlushbar(
                         context: context,
-                        message: "$_quotename $_subdoc Quotes Updated");
+                        message: "$_framename $_subdoc Frames Updated");
                   } else {
                     return Snackbar().showFlushbar(
                         context: context, message: "Provide some credentials");
@@ -261,30 +261,30 @@ class _QuotesState extends State<Quotes> {
                 ),
               ),
               onPressed: () {
-                if (_quoteimageurl != '' && _quotename != '' && _subdoc == '') {
+                if (_frameimageurl != '' && _framename != '' && _subdoc == '') {
                   Map<String, dynamic> data = {
-                    "imageurl": _quoteimageurl,
-                    "name": _quotename
+                    "imageurl": _frameimageurl,
+                    "name": _framename
                   };
                   FirebaseFirestore.instance
-                      .collection("quote")
-                      .doc(_quotename)
+                      .collection("frame")
+                      .doc(_framename)
                       .delete();
                   return Snackbar().showFlushbar(
                       context: context,
-                      message: "$_quotename Cover Pic Deleted");
-                } else if (_quoteimageurl != '' &&
-                    _quotename != '' &&
+                      message: "$_framename Cover Pic Deleted");
+                } else if (_frameimageurl != '' &&
+                    _framename != '' &&
                     _subdoc != '') {
                   FirebaseFirestore.instance
-                      .collection("quote")
-                      .doc(_quotename)
-                      .collection("quotes")
+                      .collection("frame")
+                      .doc(_framename)
+                      .collection("frames")
                       .doc(_subdoc)
                       .delete();
                   return Snackbar().showFlushbar(
                       context: context,
-                      message: "$_quotename $_subdoc Quote Deleted");
+                      message: "$_framename $_subdoc Frame Deleted");
                 } else {
                   return Snackbar().showFlushbar(
                       context: context, message: "Provide some credentials");

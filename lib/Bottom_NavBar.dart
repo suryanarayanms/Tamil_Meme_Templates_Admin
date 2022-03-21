@@ -1,6 +1,6 @@
-import 'package:butterfly_effect_admin/Pages/Trending_Quote.dart';
+import 'package:butterfly_effect_admin/Pages/Trending_Frame.dart';
 import 'package:butterfly_effect_admin/Pages/Trending_Template.dart';
-import 'package:butterfly_effect_admin/Pages/quotes.dart';
+import 'package:butterfly_effect_admin/Pages/frames.dart';
 import 'package:butterfly_effect_admin/Pages/templates.dart';
 import 'package:flutter/material.dart';
 
@@ -15,9 +15,9 @@ class _AdminPageState extends State<AdminPage> {
   int _pageIndex = 0;
   final List<Widget> _tabPage = [
     const TrendingTemplate(),
-    const TrendingQuote(),
+    const TrendingFrame(),
     const Templates(),
-    const Quotes()
+    const Frames()
   ];
 
   @override

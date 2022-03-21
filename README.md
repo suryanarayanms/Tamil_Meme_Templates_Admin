@@ -1,6 +1,6 @@
 # Meme Templates App 
 
-  App containing Meme Templates, Quotes & ToDo pad.
+  App containing Meme Templates, Frames & ToDo pad.
 
 ## Admin App
 
