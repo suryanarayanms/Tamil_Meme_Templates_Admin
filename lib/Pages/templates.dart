@@ -177,7 +177,7 @@ class _TemplatesState extends State<Templates> {
                         .doc(_tempname)
                         .collection("templates")
                         .doc(_subdoc)
-                        .set({"imageurl": _tempimageurl, "name": _tempname});
+                        .set({"imageurl": _tempimageurl, "name": _subdoc});
                     return Snackbar().showFlushbar(
                         context: context,
                         message: "$_tempname $_subdoc Template Uploaded");
@@ -228,7 +228,7 @@ class _TemplatesState extends State<Templates> {
                         .doc(_tempname)
                         .collection("templates")
                         .doc(_subdoc)
-                        .update({"imageurl": _tempimageurl, "name": _tempname});
+                        .update({"imageurl": _tempimageurl, "name": _subdoc});
                     return Snackbar().showFlushbar(
                         context: context,
                         message: "$_tempname $_subdoc Template Updated");

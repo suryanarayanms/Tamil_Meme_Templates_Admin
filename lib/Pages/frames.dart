@@ -179,7 +179,7 @@ class _FramesState extends State<Frames> {
                         .doc(_framename)
                         .collection("frames")
                         .doc(_subdoc)
-                        .set({"imageurl": _frameimageurl, "name": _framename});
+                        .set({"imageurl": _frameimageurl, "name": _subdoc});
                     return Snackbar().showFlushbar(
                         context: context,
                         message: "$_framename $_subdoc Frames Uploaded");
@@ -233,8 +233,7 @@ class _FramesState extends State<Frames> {
                         .doc(_framename)
                         .collection("frames")
                         .doc(_subdoc)
-                        .update(
-                            {"imageurl": _frameimageurl, "name": _framename});
+                        .update({"imageurl": _frameimageurl, "name": _subdoc});
                     return Snackbar().showFlushbar(
                         context: context,
                         message: "$_framename $_subdoc Frames Updated");
