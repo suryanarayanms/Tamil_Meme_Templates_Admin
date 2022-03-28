@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Butterfly Effect Admin',
+      title: 'Tamil Meme Templates Admin',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
