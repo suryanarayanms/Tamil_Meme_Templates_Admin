@@ -54,7 +54,7 @@ class _TemplatesState extends State<Templates> {
             ),
             child: TextField(
               autofocus: false,
-              cursorColor: Color(0xFF21BFBD),
+              cursorColor: const Color(0xFF21BFBD),
               onChanged: (value) {
                 _tempimageurl = value;
               },
@@ -90,7 +90,7 @@ class _TemplatesState extends State<Templates> {
             ),
             child: TextField(
               autofocus: false,
-              cursorColor: Color(0xFF21BFBD),
+              cursorColor: const Color(0xFF21BFBD),
               onChanged: (tempname) {
                 _tempname = tempname;
               },
@@ -126,7 +126,7 @@ class _TemplatesState extends State<Templates> {
             ),
             child: TextField(
               autofocus: false,
-              cursorColor: Color(0xFF21BFBD),
+              cursorColor: const Color(0xFF21BFBD),
               onChanged: (subtemp) {
                 _subdoc = subtemp;
               },
@@ -149,7 +149,7 @@ class _TemplatesState extends State<Templates> {
                   foregroundColor:
                       MaterialStateProperty.all<Color>(Colors.white),
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(Color(0xFF21BFBD)),
+                      MaterialStateProperty.all<Color>(const Color(0xFF21BFBD)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -186,7 +186,7 @@ class _TemplatesState extends State<Templates> {
                         context: context, message: "Provide some credentials");
                   }
                 },
-                child: Text('U   P   L   O   A   D'),
+                child: const Text('U   P   L   O   A   D'),
               ),
             ),
           ),
@@ -237,7 +237,7 @@ class _TemplatesState extends State<Templates> {
                         context: context, message: "Provide some credentials");
                   }
                 },
-                child: Text('U   P   D   A   T   E'),
+                child: const Text('U   P   D   A   T   E'),
               ),
             ),
           ),
@@ -284,7 +284,7 @@ class _TemplatesState extends State<Templates> {
                       context: context, message: "Provide some credentials");
                 }
               },
-              child: Text('D   E   L   E   T   E'),
+              child: const Text('D   E   L   E   T   E'),
             ),
           )
         ],

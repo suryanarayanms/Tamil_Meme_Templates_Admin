@@ -188,7 +188,7 @@ class _FramesState extends State<Frames> {
                         context: context, message: "Provide some credentials");
                   }
                 },
-                child: Text('U   P   L   O   A   D'),
+                child: const Text('U   P   L   O   A   D'),
               ),
             ),
           ),
@@ -242,7 +242,7 @@ class _FramesState extends State<Frames> {
                         context: context, message: "Provide some credentials");
                   }
                 },
-                child: Text('U   P   D   A   T   E'),
+                child: const Text('U   P   D   A   T   E'),
               ),
             ),
           ),
@@ -289,7 +289,7 @@ class _FramesState extends State<Frames> {
                       context: context, message: "Provide some credentials");
                 }
               },
-              child: Text('D   E   L   E   T   E'),
+              child: const Text('D   E   L   E   T   E'),
             ),
           )
         ],

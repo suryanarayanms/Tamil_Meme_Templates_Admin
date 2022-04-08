@@ -55,7 +55,7 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
             ),
             child: TextField(
               autofocus: false,
-              cursorColor: Color(0xFF7B61FF),
+              cursorColor: const Color(0xFF7B61FF),
               onChanged: (value) {
                 _ttempimageurl = value;
               },
@@ -91,7 +91,7 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
             ),
             child: TextField(
               autofocus: false,
-              cursorColor: Color(0xFF7B61FF),
+              cursorColor: const Color(0xFF7B61FF),
               onChanged: (value) {
                 _name = value;
               },
@@ -114,7 +114,7 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
                   foregroundColor:
                       MaterialStateProperty.all<Color>(Colors.white),
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(Color(0xFF7B61FF)),
+                      MaterialStateProperty.all<Color>(const Color(0xFF7B61FF)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -139,7 +139,7 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
                         context: context, message: "Provide some credentials");
                   }
                 },
-                child: Text('U   P   L   O   A   D'),
+                child: const Text('U   P   L   O   A   D'),
               ),
             ),
           ),
@@ -178,7 +178,7 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
                         context: context, message: "Provide some credentials");
                   }
                 },
-                child: Text('U  P  D  A  T  E'),
+                child: const Text('U  P  D  A  T  E'),
               ),
             ),
           ),
@@ -213,7 +213,7 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
                       context: context, message: "Provide some credentials");
                 }
               },
-              child: Text('D  E  L  E  T  E'),
+              child: const Text('D  E  L  E  T  E'),
             ),
           )
         ],
