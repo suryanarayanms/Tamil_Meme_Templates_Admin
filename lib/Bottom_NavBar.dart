@@ -1,6 +1,4 @@
-import 'package:butterfly_effect_admin/Pages/Trending_Frame.dart';
 import 'package:butterfly_effect_admin/Pages/Trending_Template.dart';
-import 'package:butterfly_effect_admin/Pages/frames.dart';
 import 'package:butterfly_effect_admin/Pages/templates.dart';
 import 'package:flutter/material.dart';
 
@@ -15,9 +13,9 @@ class _AdminPageState extends State<AdminPage> {
   int _pageIndex = 0;
   final List<Widget> _tabPage = [
     const TrendingTemplate(),
-    const TrendingFrame(),
+    // const TrendingFrame(),
     const Templates(),
-    const Frames()
+    // const Frames()
   ];
 
   @override
@@ -65,24 +63,24 @@ class _AdminPageState extends State<AdminPage> {
                             color: Color(0xFF7B61FF),
                           ),
                           label: ""),
-                      BottomNavigationBarItem(
-                          icon: Icon(
-                            Icons.account_tree_rounded,
-                            color: Colors.pink,
-                          ),
-                          label: ""),
+                      // BottomNavigationBarItem(
+                      //     icon: Icon(
+                      //       Icons.account_tree_rounded,
+                      //       color: Colors.pink,
+                      //     ),
+                      //     label: ""),
                       BottomNavigationBarItem(
                           icon: Icon(
                             Icons.timeline_sharp,
                             color: Color(0xFF21BFBD),
                           ),
                           label: ""),
-                      BottomNavigationBarItem(
-                          icon: Icon(
-                            Icons.mode_night,
-                            color: Colors.blueAccent,
-                          ),
-                          label: ""),
+                      // BottomNavigationBarItem(
+                      //     icon: Icon(
+                      //       Icons.mode_night,
+                      //       color: Colors.blueAccent,
+                      //     ),
+                      //     label: ""),
                     ],
                   ),
                 ),
