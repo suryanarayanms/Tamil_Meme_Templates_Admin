@@ -21,6 +21,7 @@ class _AdminPageState extends State<AdminPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff181A28),
       body: Stack(
         children: [
           _tabPage.elementAt(_pageIndex),
