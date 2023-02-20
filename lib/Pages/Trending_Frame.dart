@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TrendingFrame extends StatefulWidget {
-  const TrendingFrame({Key? key}) : super(key: key);
+  const TrendingFrame({Key key}) : super(key: key);
 
   @override
   State<TrendingFrame> createState() => _TrendingFrameState();

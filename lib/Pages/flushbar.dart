@@ -2,7 +2,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
 class Snackbar {
-  showFlushbar({required BuildContext context, required String message}) {
+  showFlushbar({BuildContext context, String message}) {
     double deviceWidth = MediaQuery.of(context).size.width;
     Flushbar(
       messageText: Center(

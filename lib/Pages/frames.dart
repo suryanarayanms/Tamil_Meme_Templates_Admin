@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Frames extends StatefulWidget {
-  const Frames({Key? key}) : super(key: key);
+  const Frames({Key key}) : super(key: key);
 
   @override
   State<Frames> createState() => _FramesState();

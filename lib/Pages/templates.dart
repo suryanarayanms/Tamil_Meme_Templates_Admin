@@ -8,7 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Templates extends StatefulWidget {
-  const Templates({Key? key}) : super(key: key);
+  const Templates({Key key}) : super(key: key);
 
   @override
   State<Templates> createState() => _TemplatesState();
@@ -18,9 +18,9 @@ class _TemplatesState extends State<Templates> {
   String _tempimageurl = '';
   String _tempname = '';
   String _subdoc = '';
-  File? imageFile;
-  XFile? imagePath;
-  File? imagepicked;
+  File imageFile;
+  XFile imagePath;
+  File imagepicked;
   var uploadPath = '';
   final ImagePicker _picker = ImagePicker();
   FirebaseStorage storageRef = FirebaseStorage.instance;
@@ -123,9 +123,9 @@ class _TemplatesState extends State<Templates> {
                             .child(coverpicname)
                             .child(uploadFileName);
                         UploadTask uploadTask =
-                            reference.putFile(File(imagePath!.path));
+                            reference.putFile(File(imagePath.path));
                         setState(() {
-                          imageFile = File(imagePath!.path);
+                          imageFile = File(imagePath.path);
                         });
                         uploadTask.whenComplete(() async {
                           uploadPath =
@@ -149,9 +149,9 @@ class _TemplatesState extends State<Templates> {
                             .child(templatename)
                             .child(uploadFileName);
                         UploadTask uploadTask =
-                            reference.putFile(File(imagePath!.path));
+                            reference.putFile(File(imagePath.path));
                         setState(() {
-                          imageFile = File(imagePath!.path);
+                          imageFile = File(imagePath.path);
                         });
                         uploadTask.whenComplete(() async {
                           uploadPath =
@@ -205,9 +205,9 @@ class _TemplatesState extends State<Templates> {
                             .child(coverpicname)
                             .child(uploadFileName);
                         UploadTask uploadTask =
-                            reference.putFile(File(imagePath!.path));
+                            reference.putFile(File(imagePath.path));
                         setState(() {
-                          imageFile = File(imagePath!.path);
+                          imageFile = File(imagePath.path);
                         });
                         uploadTask.whenComplete(() async {
                           uploadPath =
@@ -232,9 +232,9 @@ class _TemplatesState extends State<Templates> {
                             .child(templatename)
                             .child(uploadFileName);
                         UploadTask uploadTask =
-                            reference.putFile(File(imagePath!.path));
+                            reference.putFile(File(imagePath.path));
                         setState(() {
-                          imageFile = File(imagePath!.path);
+                          imageFile = File(imagePath.path);
                         });
                         uploadTask.whenComplete(() async {
                           uploadPath =
@@ -348,7 +348,7 @@ class _TemplatesState extends State<Templates> {
                         ? GestureDetector(
                             onTap: (() => {imagepicker()}),
                             child: Image.file(
-                              imagepicked!,
+                              imagepicked,
                               fit: BoxFit.cover,
                             ),
                           )
@@ -426,7 +426,7 @@ class _TemplatesState extends State<Templates> {
   }
 
   imagepicker() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final XFile image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       try {
         final imageFile = File(image.path);
@@ -442,5 +442,5 @@ class _TemplatesState extends State<Templates> {
     }
   }
 
-  String? imgname = '';
+  String imgname = '';
 }

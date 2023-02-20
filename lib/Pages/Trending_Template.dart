@@ -9,7 +9,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TrendingTemplate extends StatefulWidget {
-  const TrendingTemplate({Key? key}) : super(key: key);
+  const TrendingTemplate({Key key}) : super(key: key);
 
   @override
   State<TrendingTemplate> createState() => _TrendingTemplateState();
@@ -17,9 +17,9 @@ class TrendingTemplate extends StatefulWidget {
 
 class _TrendingTemplateState extends State<TrendingTemplate> {
   String _name = '';
-  File? imageFile;
-  XFile? imagePath;
-  File? imagepicked;
+  File imageFile;
+  XFile imagePath;
+  File imagepicked;
   var uploadPath = '';
   final ImagePicker _picker = ImagePicker();
   FirebaseStorage storageRef = FirebaseStorage.instance;
@@ -100,10 +100,10 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
                               .child(collectionName)
                               .child(uploadFileName);
                           UploadTask uploadTask =
-                              reference.putFile(File(imagePath!.path));
+                              reference.putFile(File(imagePath.path));
 
                           setState(() {
-                            imageFile = File(imagePath!.path);
+                            imageFile = File(imagePath.path);
                           });
 
                           uploadTask.whenComplete(() async {
@@ -157,10 +157,10 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
                               .child(collectionName)
                               .child(uploadFileName);
                           UploadTask uploadTask =
-                              reference.putFile(File(imagePath!.path));
+                              reference.putFile(File(imagePath.path));
 
                           setState(() {
-                            imageFile = File(imagePath!.path);
+                            imageFile = File(imagePath.path);
                           });
 
                           uploadTask.whenComplete(() async {
@@ -264,7 +264,7 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
                         ? GestureDetector(
                             onTap: (() => {imagepicker()}),
                             child: Image.file(
-                              imagepicked!,
+                              imagepicked,
                               fit: BoxFit.cover,
                             ),
                           )
@@ -342,7 +342,7 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
   }
 
   imagepicker() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final XFile image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       try {
         final imageFile = File(image.path);
@@ -358,5 +358,5 @@ class _TrendingTemplateState extends State<TrendingTemplate> {
     }
   }
 
-  String? imgname = '';
+  String imgname = '';
 }

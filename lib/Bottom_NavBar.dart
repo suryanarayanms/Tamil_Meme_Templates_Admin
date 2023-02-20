@@ -3,7 +3,7 @@ import 'package:butterfly_effect_admin/Pages/templates.dart';
 import 'package:flutter/material.dart';
 
 class AdminPage extends StatefulWidget {
-  const AdminPage({Key? key}) : super(key: key);
+  const AdminPage({Key key}) : super(key: key);
 
   @override
   State<AdminPage> createState() => _AdminPageState();
